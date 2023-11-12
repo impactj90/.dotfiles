@@ -10,7 +10,6 @@ do
 done
 popd
 
-pushd ./netflix
-./stow
+pushd ./stow
 popd
 
