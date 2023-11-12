@@ -10,6 +10,6 @@ do
 done
 popd
 
-pushd ~/netflix
+pushd ~/.config
 ~/stow
 popd
