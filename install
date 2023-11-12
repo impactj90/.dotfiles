@@ -10,6 +10,6 @@ do
 done
 popd
 
-./stow
+pushd ./stow
 popd
 
