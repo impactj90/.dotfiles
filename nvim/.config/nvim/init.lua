@@ -265,6 +265,7 @@ vim.keymap.set('n', '<leader>w', ":w!<CR>")
 vim.keymap.set('n', '<leader>q', ":q!<CR>")
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)
+vim.keymap.set('n', '<C-f>', ':!tmux neww ~/.local/bin/tmux-sessionizer<CR>', {expr = true, silent = true})
 
 -- [[ Git fugitive ]]
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
