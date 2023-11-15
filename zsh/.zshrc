@@ -99,7 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vpncon="~/forticlientsslvpn/64bit/forticlientsslvpn_cli --server access-nue.ipls.telekom.net:10433 --vpnuser ext_devo_tayva --pkcs12 /etc/ssl/certs/webmice_devoteam.p12"
 alias zc="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
 source ~/.zsh_profile
