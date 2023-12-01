@@ -101,6 +101,23 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zc="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
+
+# docker 
+
+alias dclear="dsac && drac && drai"
+
+# docker list all 
+alias dlc="docker ps -a"
+alias dli="docker images ps -a"
+
+#remove and stop 
+alias dsac="docker stop $(docker ps)"
+alias drac="docker rm $(docker ps -a -q)"
+alias drai="docker rmi $(docker images -a -q)"
+
+alias dcup="docker-compose up"
+alias dcdown="docker-compose down"
+
 source ~/.zsh_profile
 
 

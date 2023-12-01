@@ -129,7 +129,6 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
     'catppuccin/nvim',
     priority = 1000,
     config = function()
@@ -212,6 +211,7 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+vim.o.background = "dark"
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -262,7 +262,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -280,7 +279,7 @@ vim.keymap.set('n', '<leader>w', ":w!<CR>")
 vim.keymap.set('n', '<leader>q', ":q!<CR>")
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)
-vim.keymap.set('n', '<C-f>', ':!tmux neww tmux-sessionizer<CR>', {silent = true})
+vim.keymap.set('n', '<C-f>', ':!tmux neww tmux-sessionizer<CR>', { silent = true })
 
 -- [[ Git fugitive ]]
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
@@ -377,7 +376,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
