@@ -268,6 +268,9 @@ vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)
 
 -- [[ Git fugitive ]]
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+vim.keymap.set('n', '<leader>mc', ":Gvdiffsplit!<CR>")
+vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
+vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
