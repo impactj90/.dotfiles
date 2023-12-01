@@ -283,6 +283,9 @@ vim.keymap.set('n', '<C-f>', ':!tmux neww tmux-sessionizer<CR>', { silent = true
 
 -- [[ Git fugitive ]]
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+vim.keymap.set('n', '<leader>mc', ":Gvdiffsplit!<CR>")
+vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
+vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
 -- [[ Configure Harpoon ]]
 require('harpoon').setup {
