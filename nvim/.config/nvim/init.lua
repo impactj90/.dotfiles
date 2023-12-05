@@ -65,8 +65,16 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  'nvim-lua/plenary.nvim',
   'christoomey/vim-tmux-navigator',
-  'ThePrimeagen/harpoon',
+  {
+    'ThePrimeagen/harpoon',
+    branch = "harpoon2",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    }
+  },
+
   {
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
@@ -288,14 +296,19 @@ vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
 vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
 -- [[ Configure Harpoon ]]
-require('harpoon').setup {
-  vim.keymap.set("n", "<leader>a", require('harpoon.mark').add_file, {}),
-  vim.keymap.set("n", "<leader>e", require('harpoon.ui').toggle_quick_menu, {}),
-  vim.keymap.set("n", "<leader>h", function() require('harpoon.ui').nav_file(1) end),
-  vim.keymap.set("n", "<leader>j", function() require('harpoon.ui').nav_file(2) end),
-  vim.keymap.set("n", "<leader>l", function() require('harpoon.ui').nav_file(4) end),
-  vim.keymap.set("n", "<leader>k", function() require('harpoon.ui').nav_file(3) end),
-}
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
 -- [[ Configuration Prettier ]]
 local null_ls = require("null-ls")
