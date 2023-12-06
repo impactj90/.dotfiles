@@ -67,14 +67,7 @@ require('lazy').setup({
 
   'nvim-lua/plenary.nvim',
   'christoomey/vim-tmux-navigator',
-  {
-    'ThePrimeagen/harpoon',
-    branch = "harpoon2",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    }
-  },
-
+  'ThePrimeagen/harpoon',
   {
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
@@ -120,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',     opts = {} },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -136,14 +129,7 @@ require('lazy').setup({
     },
   },
 
-  {
-    'catppuccin/nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'catppuccin'
-    end,
-  },
-
+  { "ellisonleao/gruvbox.nvim", priority = 1000,  config = true },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -220,6 +206,8 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])
+vim.api.nvim_set_hl(0, "Normal", {bg = "#171414" })
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -296,20 +284,14 @@ vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
 vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
 -- [[ Configure Harpoon ]]
-local harpoon = require("harpoon")
-
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-
-vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
-
+require('harpoon').setup {
+  vim.keymap.set("n", "<leader>a", require('harpoon.mark').add_file, {}),
+  vim.keymap.set("n", "<leader>e", require('harpoon.ui').toggle_quick_menu, {}),
+  vim.keymap.set("n", "<leader>h", function() require('harpoon.ui').nav_file(1) end),
+  vim.keymap.set("n", "<leader>j", function() require('harpoon.ui').nav_file(2) end),
+  vim.keymap.set("n", "<leader>l", function() require('harpoon.ui').nav_file(4) end),
+  vim.keymap.set("n", "<leader>k", function() require('harpoon.ui').nav_file(3) end),
+}
 -- [[ Configuration Prettier ]]
 local null_ls = require("null-ls")
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
