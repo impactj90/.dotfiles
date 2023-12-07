@@ -1,1 +1,2 @@
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
+bindkey -s ^n "nvim .\n"
