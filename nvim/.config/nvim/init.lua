@@ -129,7 +129,7 @@ require('lazy').setup({
     },
   },
 
-  { "ellisonleao/gruvbox.nvim", priority = 1000,  config = true },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -207,7 +207,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 vim.o.background = "dark"
 vim.cmd([[colorscheme gruvbox]])
-vim.api.nvim_set_hl(0, "Normal", {bg = "#171414" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "#171414" })
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -541,11 +541,12 @@ require('mason-lspconfig').setup()
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  clangd = {},
+  gopls = {},
+  pyright = {},
+  rust_analyzer = {},
+  tsserver = {},
+  volar = {},
 
   lua_ls = {
     Lua = {
