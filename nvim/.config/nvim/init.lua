@@ -113,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',     opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -128,8 +128,7 @@ require('lazy').setup({
       },
     },
   },
-
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+  { 'rose-pine/neovim', name = 'rose-pine' },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -206,7 +205,7 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme rose-pine]])
 vim.api.nvim_set_hl(0, "Normal", { bg = "#171414" })
 
 -- Set highlight on search
@@ -402,13 +401,14 @@ vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'S
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+--@diagnostic disable-next-line: missing-fields
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
+    auto_install = true,
 
     highlight = { enable = true },
     indent = { enable = true },

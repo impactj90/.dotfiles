@@ -111,7 +111,7 @@ alias dlc="docker ps -a"
 alias dli="docker images ps -a"
 
 #remove and stop 
-alias dsac="docker stop $(docker ps)"
+alias dsac="docker stop $(docker ps -a -q)"
 alias drac="docker rm $(docker ps -a -q)"
 alias drai="docker rmi $(docker images -a -q)"
 
