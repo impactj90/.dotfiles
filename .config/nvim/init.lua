@@ -79,6 +79,9 @@ require('lazy').setup({
   'mfussenegger/nvim-dap',
   'mfussenegger/nvim-jdtls',
 
+  --copilot
+  'github/copilot.vim',
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
