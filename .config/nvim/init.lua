@@ -187,7 +187,6 @@ require('lazy').setup({
   'jose-elias-alvarez/null-ls.nvim',
   'MunifTanjim/prettier.nvim',
 
-  'ellisonleao/gruvbox.nvim',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -210,7 +209,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- Set h
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme rosepine]])
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "#171414" })
 

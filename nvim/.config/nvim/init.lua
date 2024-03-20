@@ -76,6 +76,9 @@ require('lazy').setup({
     },
   },
 
+  -- copilot
+  'github/copilot.vim',
+
   -- dap
   'mfussenegger/nvim-dap',
   'mfussenegger/nvim-jdtls',
