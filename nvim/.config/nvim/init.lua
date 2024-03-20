@@ -81,6 +81,10 @@ require('lazy').setup({
 
   -- dap
   'mfussenegger/nvim-dap',
+  'leoluz/nvim-dap-go',
+  'nvim-neotest/nvim-nio',
+  'rcarriga/nvim-dap-ui',
+  'theHamsta/nvim-dap-virtual-text',
   'mfussenegger/nvim-jdtls',
 
   -- Git related plugins
@@ -582,6 +586,35 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+
+-- [[ Configure nvim-dap-go ]]
+vim.keymap.set('n', '<F5>', require('dap').continue, { desc = 'Continue' })
+vim.keymap.set('n', '<F10>', require('dap').step_over, { desc = 'Step Over' })
+vim.keymap.set('n', '<F11>', require('dap').step_into, {desc = 'Step Into'})
+vim.keymap.set('n', '<F12>', require('dap').step_out, {desc = 'Step Out'})
+vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, {desc = 'toggle_breakpoint'})
+vim.keymap.set('n', '<leader>dr', require('dap').repl.open, {desc = 'repl.open'})
+vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = 'Continue' })
+vim.keymap.set('n', '<leader>dx', require('dap').close, { desc = 'Continue' })
+
+require('nvim-dap-virtual-text').setup({})
+require('dap-go').setup()
+require('dapui').setup()
+
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
