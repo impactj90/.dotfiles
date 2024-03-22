@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zc="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
+alias nc="nvim ~/.config/nvim/init.lua"
 
 # docker 
 
@@ -121,6 +122,10 @@ alias dcup="docker-compose up"
 alias dcdown="docker-compose down"
 
 source ~/.zsh_profile
+
+csbdb-prod() { ssh -L 5432:csbdb-prod-slv2-172-cluster.cluster-cvyz1nvro4kv.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-prod; }
+csbdb-int() { ssh -L 5433:csbdb-int-slv2-172.cwiuygc2pii6.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-int; }
+csbdb-test() { ssh -L 5434:csbdb-test-slv2-172.c7sqhl4cqxse.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-test; }
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

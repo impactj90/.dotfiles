@@ -589,14 +589,14 @@ mason_lspconfig.setup_handlers {
 
 
 -- [[ Configure nvim-dap-go ]]
-vim.keymap.set('n', '<F5>', require('dap').continue, { desc = 'Continue' })
-vim.keymap.set('n', '<F10>', require('dap').step_over, { desc = 'Step Over' })
-vim.keymap.set('n', '<F11>', require('dap').step_into, {desc = 'Step Into'})
-vim.keymap.set('n', '<F12>', require('dap').step_out, {desc = 'Step Out'})
-vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, {desc = 'toggle_breakpoint'})
-vim.keymap.set('n', '<leader>dr', require('dap').repl.open, {desc = 'repl.open'})
-vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = 'Continue' })
-vim.keymap.set('n', '<leader>dx', require('dap').close, { desc = 'Continue' })
+vim.keymap.set('n', '<F3>', require('dap').continue, { desc = 'Continue' })
+vim.keymap.set('n', '<F4>', require('dap').step_over, { desc = 'Step Over' })
+vim.keymap.set('n', '<F5>', require('dap').step_into, {desc = 'Step Into'})
+vim.keymap.set('n', '<F6>', require('dap').step_out, {desc = 'Step Out'})
+vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, {desc = 'Toggle Breakpoint'})
+vim.keymap.set('n', '<leader>dr', require('dap').repl.open, {desc = 'Open Repl'})
+vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = 'Open debugger' })
+vim.keymap.set('n', '<leader>dx', require('dap').close, { desc = 'Close debugger' })
 
 require('nvim-dap-virtual-text').setup({})
 require('dap-go').setup()
