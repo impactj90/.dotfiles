@@ -1,10 +1,11 @@
+export GOPATH=/home/theimpact/go
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto/bin
 # If you come from bash you might have to change your $PATH.
-export PATH="$PATH:/usr/local/go/bin:/opt/idea-IU-233.14808.21/bin"
+export PATH="$PATH:$GOPATH/bin:/opt/idea-IU-233.14808.21/bin:/home/theimpact/go/:$JAVA_HOME"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-GOPRIVATE=git.i.mercedes-benz.com
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zc="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
-alias nc="nvim ~/.config/nvim/init.lua"
+alias nvc="nvim ~/.config/nvim/init.lua"
 
 # docker 
 
@@ -123,10 +124,6 @@ alias dcdown="docker-compose down"
 
 source ~/.zsh_profile
 
-csbdb-prod() { ssh -L 5432:csbdb-prod-slv2-172-cluster.cluster-cvyz1nvro4kv.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-prod; }
-csbdb-int() { ssh -L 5433:csbdb-int-slv2-172.cwiuygc2pii6.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-int; }
-csbdb-test() { ssh -L 5434:csbdb-test-slv2-172.c7sqhl4cqxse.eu-central-1.rds.amazonaws.com:5432 -N -T sqs-test; }
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -136,3 +133,12 @@ if [ -f '/home/theimpact/projects/cid_be/google-cloud-sdk/path.zsh.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/theimpact/projects/cid_be/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/theimpact/projects/cid_be/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+autoload -U add-zsh-hook
+update_tmux_pwd() {
+  if [ -n "$TMUX" ]; then
+    tmux setenv -g PWD "$(pwd)"
+  fi
+}
+add-zsh-hook chpwd update_tmux_pwd

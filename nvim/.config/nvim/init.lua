@@ -76,9 +76,6 @@ require('lazy').setup({
     },
   },
 
-  -- copilot
-  'github/copilot.vim',
-
   -- dap
   'mfussenegger/nvim-dap',
   'leoluz/nvim-dap-go',
@@ -289,6 +286,48 @@ vim.keymap.set('n', '<leader>mc', ":Gvdiffsplit!<CR>")
 vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
 vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
+-- [[ Configure Lualine ]]
+require('lualine').setup {
+  options = {
+    icons_enabled = false,
+    theme = 'auto',
+    component_separators = { left = '|', right = '|'},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {{'filename', path = 1}},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+
 -- [[ Configure Harpoon ]]
 require('harpoon').setup {
   vim.keymap.set("n", "<C-a>", require('harpoon.mark').add_file, {}),
@@ -411,8 +450,9 @@ vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'S
 --@diagnostic disable-next-line: missing-fields
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
+    build = ':TSUpdate',
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'java' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
