@@ -1,7 +1,7 @@
-export GOPATH=/home/theimpact/go
+export GOPATH=$HOME/go
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto/bin
 # If you come from bash you might have to change your $PATH.
-export PATH="$PATH:$GOPATH/bin:/opt/idea-IU-233.14808.21/bin:/home/theimpact/go/:$JAVA_HOME"
+export PATH="$PATH:$GOPATH/bin:/opt/idea-IU-233.14808.21/bin:$JAVA_HOME"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -135,6 +135,12 @@ if [ -f '/home/theimpact/projects/cid_be/google-cloud-sdk/path.zsh.inc' ]; then 
 if [ -f '/home/theimpact/projects/cid_be/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/theimpact/projects/cid_be/google-cloud-sdk/completion.zsh.inc'; fi
 
 
+source <(fzf --zsh)
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
 autoload -U add-zsh-hook
 update_tmux_pwd() {
   if [ -n "$TMUX" ]; then
@@ -142,3 +148,5 @@ update_tmux_pwd() {
   fi
 }
 add-zsh-hook chpwd update_tmux_pwd
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
