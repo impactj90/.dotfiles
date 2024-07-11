@@ -275,6 +275,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[CUSOTM START HERE ]]
 --
 vim.keymap.set('n', '<leader>w', ":w!<CR>")
+vim.keymap.set('n', '<leader>W', ":wa!<CR>")
 vim.keymap.set('n', '<leader>q', ":q!<CR>")
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)

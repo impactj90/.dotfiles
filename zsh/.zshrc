@@ -104,6 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zc="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
+alias snvim="source ~/.config/nvim/init.lua"
 alias nvc="nvim ~/.config/nvim/init.lua"
 
 # docker 
