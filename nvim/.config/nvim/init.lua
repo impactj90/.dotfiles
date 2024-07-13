@@ -187,7 +187,14 @@ require('lazy').setup({
 
   -- prettier
   'jose-elias-alvarez/null-ls.nvim',
-  'MunifTanjim/prettier.nvim'
+  'MunifTanjim/prettier.nvim',
+
+  {
+    'vim-test/vim-test',
+    dependencies = {
+      'preservim/vimux'
+    }
+  }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -279,7 +286,16 @@ vim.keymap.set('n', '<leader>W', ":wa!<CR>")
 vim.keymap.set('n', '<leader>q', ":q!<CR>")
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)
-vim.keymap.set('n', '<C-f>', ':!tmux neww tmux-sessionizer<CR>', { silent = true })
+vim.keymap.set('n', '<C-f>', ':!tmux neww $HOME/.local/bin/tmux-sessionizer<CR>', { silent = true })
+
+-- [[ Vim-test ]]
+vim.keymap.set('n','<leader>t', ':TestNearest<CR>')
+vim.keymap.set('n','<leader>T', ':TestFile<CR>')
+vim.keymap.set('n','<leader>a', ':TestSuite<CR>')
+vim.keymap.set('n','<leader>l', ':TestLast<CR>')
+vim.keymap.set('n','<leader>g', ':TestVisit<CR>')
+
+vim.cmd("let test#strategy = 'vimux'")
 
 -- [[ Git fugitive ]]
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
