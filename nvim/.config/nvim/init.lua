@@ -201,7 +201,9 @@ require('lazy').setup({
     'tpope/vim-dadbod',
     'kristijanhusak/vim-dadbod-completion',
     'kristijanhusak/vim-dadbod-ui',
-  }
+  },
+
+  'mbbill/undotree'
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -312,6 +314,9 @@ vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
 -- [[ vim dadbod ]]
 vim.keymap.set('n', '<leader>sq', ":DBUI<CR>")
+
+-- [[ vim undotree ]]
+vim.keymap.set('n', '<leader>U', ":UndotreeToggle<CR>")
 
 -- [[ Configure Lualine ]]
 require('lualine').setup {
