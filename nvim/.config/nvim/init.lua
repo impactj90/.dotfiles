@@ -132,7 +132,7 @@ require('lazy').setup({
       },
     },
   },
-  { 'rose-pine/neovim', name = 'rose-pine' },
+  { 'rose-pine/neovim',     name = 'rose-pine' },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -194,6 +194,13 @@ require('lazy').setup({
     dependencies = {
       'preservim/vimux'
     }
+  },
+
+  -- vimdadbod sql plugin
+  {
+    'tpope/vim-dadbod',
+    'kristijanhusak/vim-dadbod-completion',
+    'kristijanhusak/vim-dadbod-ui',
   }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -289,11 +296,11 @@ vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format)
 vim.keymap.set('n', '<C-f>', ':!tmux neww $HOME/.local/bin/tmux-sessionizer<CR>', { silent = true })
 
 -- [[ Vim-test ]]
-vim.keymap.set('n','<leader>t', ':TestNearest<CR>')
-vim.keymap.set('n','<leader>T', ':TestFile<CR>')
-vim.keymap.set('n','<leader>a', ':TestSuite<CR>')
-vim.keymap.set('n','<leader>l', ':TestLast<CR>')
-vim.keymap.set('n','<leader>g', ':TestVisit<CR>')
+vim.keymap.set('n', '<leader>t', ':TestNearest<CR>')
+vim.keymap.set('n', '<leader>T', ':TestFile<CR>')
+vim.keymap.set('n', '<leader>a', ':TestSuite<CR>')
+vim.keymap.set('n', '<leader>l', ':TestLast<CR>')
+vim.keymap.set('n', '<leader>g', ':TestVisit<CR>')
 
 vim.cmd("let test#strategy = 'vimux'")
 
@@ -303,13 +310,16 @@ vim.keymap.set('n', '<leader>mc', ":Gvdiffsplit!<CR>")
 vim.keymap.set('n', '<leader>F', ":diffget //2<CR>")
 vim.keymap.set('n', '<leader>J', ":diffget //3<CR>")
 
+-- [[ vim dadbod ]]
+vim.keymap.set('n', '<leader>sq', ":DBUI<CR>")
+
 -- [[ Configure Lualine ]]
 require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'auto',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '|', right = '|' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -324,18 +334,18 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {{'filename', path = 1}},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { { 'filename', path = 1 } },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
@@ -648,10 +658,10 @@ mason_lspconfig.setup_handlers {
 -- [[ Configure nvim-dap-go ]]
 vim.keymap.set('n', '<F3>', require('dap').continue, { desc = 'Continue' })
 vim.keymap.set('n', '<F4>', require('dap').step_over, { desc = 'Step Over' })
-vim.keymap.set('n', '<F5>', require('dap').step_into, {desc = 'Step Into'})
-vim.keymap.set('n', '<F6>', require('dap').step_out, {desc = 'Step Out'})
-vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, {desc = 'Toggle Breakpoint'})
-vim.keymap.set('n', '<leader>dr', require('dap').repl.open, {desc = 'Open Repl'})
+vim.keymap.set('n', '<F5>', require('dap').step_into, { desc = 'Step Into' })
+vim.keymap.set('n', '<F6>', require('dap').step_out, { desc = 'Step Out' })
+vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint, { desc = 'Toggle Breakpoint' })
+vim.keymap.set('n', '<leader>dr', require('dap').repl.open, { desc = 'Open Repl' })
 vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = 'Open debugger' })
 vim.keymap.set('n', '<leader>dx', require('dap').close, { desc = 'Close debugger' })
 
