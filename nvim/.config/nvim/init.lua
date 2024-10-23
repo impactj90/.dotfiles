@@ -187,7 +187,7 @@ require('lazy').setup({
 
   -- prettier
   'jose-elias-alvarez/null-ls.nvim',
-  'MunifTanjim/prettier.nvim',
+  'prettier/vim-prettier',
 
   {
     'vim-test/vim-test',
@@ -203,8 +203,18 @@ require('lazy').setup({
     'kristijanhusak/vim-dadbod-ui',
   },
 
-  'mbbill/undotree'
+  'mbbill/undotree',
 
+  -- markdown renderer
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -484,20 +494,31 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'Search git files' })
 
 -- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
---@diagnostic disable-next-line: missing-fields
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
+    -- Add this to automatically update installed parsers
     build = ':TSUpdate',
-    -- Add languages to be installed here that you want installed for treesitter
+
+    -- Languages to be installed for Treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'java' },
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+    -- Install languages synchronously (only install languages if `true`)
+    sync_install = false,
+
+    -- List of parsers to ignore installing (for languages you don't need)
+    ignore_install = {},
+
+    -- Autoinstall missing parsers
     auto_install = true,
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      -- You can also set `additional_vim_regex_highlighting = false` here if needed
+    },
+
     indent = { enable = true },
+
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -507,12 +528,12 @@ vim.defer_fn(function()
         node_decremental = '<M-space>',
       },
     },
+
     textobjects = {
       select = {
         enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
         keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
           ['af'] = '@function.outer',
@@ -523,7 +544,7 @@ vim.defer_fn(function()
       },
       move = {
         enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
+        set_jumps = true,
         goto_next_start = {
           [']m'] = '@function.outer',
           [']]'] = '@class.outer',
@@ -551,6 +572,9 @@ vim.defer_fn(function()
         },
       },
     },
+
+    -- This is typically an optional field but can be set to `true` for default behavior.
+    modules = {},
   }
 end, 0)
 
