@@ -538,6 +538,19 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+
+luasnip.add_snippets("go", {
+  s("iferr", {
+    t({"if err != nil {",
+      "    "}),
+    i(1, "return err"),
+    t({"",
+      "}"}),
+  })
+})
 
 cmp.setup {
   snippet = {

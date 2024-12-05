@@ -807,6 +807,20 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+
+luasnip.add_snippets("go", {
+  s("iferr", {
+    t({"if err != nil {",
+      "    "}),
+    i(1, "return err"),
+    t({"",
+      "}"}),
+  })
+})
+
 cmp.setup {
   snippet = {
     expand = function(args)
