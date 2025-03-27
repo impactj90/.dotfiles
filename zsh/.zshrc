@@ -151,3 +151,4 @@ update_tmux_pwd() {
 add-zsh-hook chpwd update_tmux_pwd
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/opt/homebrew/opt/protobuf@3/bin:$PATH"
