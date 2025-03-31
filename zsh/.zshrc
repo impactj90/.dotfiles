@@ -122,6 +122,8 @@ alias drai="docker rmi $(docker images -a -q)"
 
 alias dcup="docker-compose up"
 alias dcdown="docker-compose down"
+alias cvpn="nmcli con up id 'Bergfreunde VPN'"
+alias dvpn="nmcli con down id 'Bergfreunde VPN'"
 
 source ~/.zsh_profile
 

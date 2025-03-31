@@ -209,7 +209,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- Set h
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme rosepine]])
+vim.cmd([[colorscheme rose-pine]])
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "#171414" })
 
@@ -538,6 +538,19 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
+local s = luasnip.snippet
+local t = luasnip.text_node
+local i = luasnip.insert_node
+
+luasnip.add_snippets("go", {
+  s("iferr", {
+    t({"if err != nil {",
+      "    "}),
+    i(1, "return err"),
+    t({"",
+      "}"}),
+  })
+})
 
 cmp.setup {
   snippet = {
