@@ -187,6 +187,27 @@ require("lazy").setup({
 	},
 
 	{ "augmentcode/augment.vim" },
+	"nvim-lua/plenary.nvim",
+	{
+		"ThePrimeagen/harpoon",
+		config = function()
+			require("harpoon").setup()
+			vim.keymap.set("n", "<C-a>", require("harpoon.mark").add_file, {})
+			vim.keymap.set("n", "<C-e>", require("harpoon.ui").toggle_quick_menu, {})
+			vim.keymap.set("n", "<C-h>", function()
+				require("harpoon.ui").nav_file(1)
+			end)
+			vim.keymap.set("n", "<C-j>", function()
+				require("harpoon.ui").nav_file(2)
+			end)
+			vim.keymap.set("n", "<C-l>", function()
+				require("harpoon.ui").nav_file(4)
+			end)
+			vim.keymap.set("n", "<C-k>", function()
+				require("harpoon.ui").nav_file(3)
+			end)
+		end,
+	},
 
 	"mbbill/undotree",
 
@@ -217,6 +238,15 @@ require("lazy").setup({
 	-- See `:help gitsigns` to understand what the configuration keys do
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
+		opts = {
+			signs = {
+				add = { text = "▎" },
+				change = { text = "▎" },
+				delete = { text = "" },
+				topdelete = { text = "" },
+				changedelete = { text = "▎" },
+			},
+		},
 	},
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -992,6 +1022,10 @@ require("lazy").setup({
 
 	-- [[ vim undotree ]]
 	vim.keymap.set("n", "<leader>U", ":UndotreeToggle<CR>"),
+
+	-- NOTE: keymap for augmentcode
+	vim.keymap.set("n", "<leader>ac", ":Augment chat<CR>"),
+	vim.keymap.set("n", "<leader>at", ":Augment chat-toggle<CR>"),
 
 	-- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
