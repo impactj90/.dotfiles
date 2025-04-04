@@ -145,6 +145,8 @@ vim.g.augment_workspace_folders = {
 	vim.fn.expand("~/projects/beeyou"),
 }
 
+vim.g.augment_disable_completions = true
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -1075,5 +1077,21 @@ require("lazy").setup({
 	},
 })
 
+vim.opt.runtimepath:append(vim.fn.expand("~/projects/pr-notifier"))
+
+vim.api.nvim_create_user_command("ReloadPlugin", function()
+	package.loaded["pr-notifier"] = nil
+	require("pr-notifier").setup({
+		owner = "bergfreunde",
+		repo = "your-repository",
+		window = {
+			width = 150,
+			height = 40,
+		},
+	})
+	vim.notify("GitHub PR Browser plugin reloaded!")
+end, {})
+
+-- PR Notifier plugin diagnostics
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
