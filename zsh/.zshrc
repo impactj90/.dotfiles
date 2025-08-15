@@ -1,7 +1,8 @@
 export GOPATH=$HOME/go
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto/bin
+export GOBIN=$GOPATH/bin
+
 # If you come from bash you might have to change your $PATH.
-export PATH="$PATH:$GOPATH/bin:/opt/idea-IU-233.14808.21/bin:$JAVA_HOME"
+export PATH="$PATH:$GOBIN"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -154,3 +155,29 @@ add-zsh-hook chpwd update_tmux_pwd
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/opt/homebrew/opt/protobuf@3/bin:$PATH"
+
+# Bfd aliases with auto completion (BFD_PATH must be set to the full path to the bfd script)
+_bfd_autocomplete() {
+    _python_argcomplete /home/tolga-ayvazoglu/work/devenv/src/tools/bf-deploy/__main__.py
+}
+
+bfd() {
+    /home/tolga-ayvazoglu/work/devenv/src/tools/bf-deploy/__main__.py "$@"
+}
+
+free-devs() {
+    bfd "c" "$@"
+}
+
+eval "$(register-python-argcomplete /home/tolga-ayvazoglu/work/devenv/src/tools/bf-deploy/__main__.py)"
+complete -F _bfd_autocomplete bfd
+
+export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+alias ggovm="$GOPATH/bin/g"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+
+# NVM setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
