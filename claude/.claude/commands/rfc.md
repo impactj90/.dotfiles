@@ -1,16 +1,51 @@
-**MANDATORY FIRST STEP**: Read `architecture.md` for applicable patterns and constraints.
+**TRIGGERED BY**: /rfc [arguments]
+**PURPOSE**: Design solution for $ARGUMENTS
 
-We are going to **RFC** for $ARGUMENTS.
+# RFC: $ARGUMENTS
 
-**REQUIRED OUTPUT**:
-- **Problem / Goal** (why we need this)
-- **Scope** (in / out)
-- **API / Contracts** (proto/HTTP request/response + status codes)
-- **Data Model Changes** (tables/entities/fields, migrations)
-- **Acceptance Criteria** (5–8 testable bullets)
-- **Non‑Functionals** (RBAC, audit, performance, error handling)
+## Problem Statement
+[What problem are we solving based on exploration?]
 
-**CHECKLIST**:
-- [ ] Patterns align with architecture.md
-- [ ] Acceptance criteria are observable/testable
-- [ ] Security & audit covered
+## Scope
+**In:**
+- [What we will do]
+
+**Out:**
+- [What we won't do]
+
+## Technical Design
+
+### Interface Design
+[How users/systems will interact with this]
+
+### Data Model
+[What data structures/storage needed]
+
+### Component Design
+[Key components and their responsibilities]
+
+## Requirements
+
+### Functional
+1. [ ] [What it must do]
+2. [ ] [What it must do]
+3. [ ] [What it must do]
+
+### Non-Functional
+- Performance: [targets]
+- Security: [requirements]
+- Scalability: [considerations]
+
+## Acceptance Criteria
+1. [ ] [Testable outcome]
+2. [ ] [Testable outcome]
+3. [ ] [Testable outcome]
+4. [ ] [Testable outcome]
+5. [ ] [Testable outcome]
+
+## Risks
+- Risk: [what could go wrong]
+  - Mitigation: [how to handle]
+
+---
+**WORKFLOW**: [/explore] ← You are here → [/plan]

@@ -1,10 +1,27 @@
-**CHECK** system readiness for $ARGUMENTS
+**TRIGGERED BY**: /check [arguments]
+**PURPOSE**: Verify system is ready for work on $ARGUMENTS
 
-**SYSTEM HEALTH**:
-- [WORKSPACE_CLEAN] - No uncommitted changes blocking work
-- [DEPENDENCIES_CURRENT] - All deps installed and verified  
-- [TEST_BASELINE] - Existing tests pass (don't inherit broken state)
-- [CONTRACTS_CURRENT] - Proto files generated and current
+**SYSTEM HEALTH CHECKS**:
 
-**OUTPUT**: ✅ Ready to explore / ❌ Fix issues first
-**NEXT**: Run @explore.md to understand the domain
+1. **Workspace Clean**
+   - Run: [WORKSPACE_CLEAN]
+   - No uncommitted changes blocking work
+
+2. **Dependencies Ready**
+   - Run: [DEPENDENCIES_CURRENT]
+   - All required dependencies installed
+
+3. **Tests Passing**
+   - Run: [TEST_BASELINE]
+   - Existing tests must pass
+
+4. **Code Generation Current**
+   - Run: [CONTRACTS_CURRENT]
+   - Generated code up to date
+
+**RESULT**: 
+- ✅ **READY** → proceed to /explore
+- ❌ **BLOCKED** → fix issues first
+
+---
+**WORKFLOW**: You are here → Next: [/explore]

@@ -1,13 +1,12 @@
-**TEACH / LEARN MODE**: Explain $ARGUMENTS deeply but concisely.
+**PAIR MODE**: Work step-by-step with me interactively.
 
-**REQUIRED OUTPUT**:
-- TL;DR (2–3 bullets)
-- Concept in our architecture
-- Practical example from this repo
-- Pitfalls
-- 60-sec checklist
-- One next step
+**BEHAVIOR**:
+- Ask at most 1 focused question per step.
+- Propose next action with minimal diff/snippet.
+- Wait for confirmation unless I say "auto-continue".
 
-**RULES**:
-- Always use repo context.
-- Keep theory short, codebase-specific.
+**OUTPUT FORMAT**:
+1) Current focus
+2) Proposed change (file + snippet)
+3) Risk/rollback
+4) ✅ Approve / tweak / skip / auto-continue?

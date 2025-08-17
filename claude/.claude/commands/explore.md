@@ -1,17 +1,37 @@
-**MANDATORY FIRST STEP**: Read and summarize BOTH `architecture.md` and `claude.md` — show me the key conventions, triggers, and clean architecture rules before proceeding.
+**TRIGGERED BY**: /explore [arguments]
+**PURPOSE**: Understand the $ARGUMENTS area of the codebase
 
-We are going to **EXPLORE** the $ARGUMENTS of the application.
+**DISCOVERY PHASE**:
 
-**REQUIRED STEPS**:
-1. Read all relevant files and modules related to this area.
-2. Reference `architecture.md` for boundaries, layers, and dependencies.
-3. Identify key components, contracts (proto/HTTP), and data models.
-4. Note RBAC, audit logging, or other cross-cutting concerns in scope.
-5. List deviations from conventions or potential risks.
+1. **Find Related Files**
+   - Search for files containing $ARGUMENTS
+   - Identify main implementation files
+   - Locate test files
+   - Find configuration files
 
-**VERIFICATION**:
-- [ ] Read and referenced architecture.md
-- [ ] Read and referenced claude.md
-- [ ] Identified all relevant files/modules
-- [ ] Mapped component relationships
-- [ ] Noted convention deviations
+2. **Map Structure**
+   - Document how components connect
+   - Identify dependencies
+   - Note data flow
+   - Find entry points
+
+3. **Check Patterns**
+   - Identify coding patterns used
+   - Note naming conventions
+   - Review similar features
+   - Document architectural decisions
+
+4. **Test Coverage**
+   - Find existing tests
+   - Note coverage gaps
+   - Identify test patterns
+
+**FINDINGS**:
+- [ ] Main files located: ___
+- [ ] Tests exist: ___
+- [ ] Documentation found: ___
+- [ ] Dependencies identified: ___
+- [ ] Patterns documented: ___
+
+---
+**WORKFLOW**: [/check] ← You are here → [/rfc]

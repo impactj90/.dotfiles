@@ -1,21 +1,61 @@
-**MANDATORY FIRST STEP**: Read `architecture.md` and `claude.md` — list 3 key architectural patterns before making any plan.
+**TRIGGERED BY**: /plan [arguments]
+**PURPOSE**: Break down implementation of $ARGUMENTS into tasks
 
-We are going to **PLAN** the $ARGUMENTS feature/fix.
+# Implementation Plan: $ARGUMENTS
 
-**MANDATORY OUTPUT FORMAT**:
-1. **Architecture Summary**: 3 key patterns from architecture.md
-2. **Workflow Summary**: 2 trigger rules from claude.md that apply
-3. **Short Overview**: What this plan achieves and why it fits our context
-4. **Function Names**: Each function with 1–3 sentences about purpose
-5. **Test Names**: Descriptive test cases to verify behavior
-6. **Files to Change**: Exact files to be added/modified
-7. **Convention Alignment**: Explicit statement of compliance
-8. **Risks/Mitigations**
-9. **Verification Questions**: 2–3 I should ask to validate
+## Overview
+[What this plan achieves - 2-3 sentences]
 
-**COMPLETION CHECKLIST**:
-- [ ] Referenced architecture.md
-- [ ] Referenced claude.md
-- [ ] All sections filled
-- [ ] Scope minimal/viable
-- [ ] Plan follows conventions
+## Tasks
+
+### Phase 1: [Foundation]
+1. **[Task Name]**
+   - What: [description]
+   - Where: [files/location]
+   - Output: [what it produces]
+
+2. **[Task Name]**
+   - What: [description]
+   - Where: [files/location]
+   - Output: [what it produces]
+
+### Phase 2: [Core Implementation]
+1. **[Task Name]**
+   - What: [description]
+   - Where: [files/location]
+   - Output: [what it produces]
+
+2. **[Task Name]**
+   - What: [description]
+   - Where: [files/location]
+   - Output: [what it produces]
+
+### Phase 3: [Integration & Testing]
+1. **[Task Name]**
+   - What: [description]
+   - Where: [files/location]
+   - Output: [what it produces]
+
+## Files to Create/Modify
+**New:**
+- [list of new files]
+
+**Modified:**
+- [list of existing files to change]
+
+## Test Cases
+- [ ] Test: [what to test]
+- [ ] Test: [what to test]
+- [ ] Test: [what to test]
+
+## Dependencies
+- [What must exist before starting]
+- [External dependencies needed]
+
+## Verification
+- [ ] Meets acceptance criteria from RFC
+- [ ] Follows project conventions
+- [ ] Tests planned for all components
+
+---
+**WORKFLOW**: [/rfc] ← You are here → [/implement]

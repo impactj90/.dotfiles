@@ -1,13 +1,47 @@
-**MANDATORY FIRST STEP**: Read `claude.md` PR rules + `architecture.md` to confirm checks.
+**TRIGGERED BY**: /pr [arguments]
+**PURPOSE**: Prepare pull request for $ARGUMENTS
 
-We are going to prepare a **PR** for $ARGUMENTS.
+# Pull Request: $ARGUMENTS
 
-**REQUIRED OUTPUT**:
-1. PR Title
-2. Summary (link to RFC/PLAN)
-3. Changes overview (bullet list)
-4. Checklist:
-    - [ ] Tests pass (`make test`)
-    - [ ] Lint passes
-    - [ ] Migrations applied/tested
-5. Risks and rollbacks
+## Title
+[Brief, clear description of changes]
+
+## Summary
+[Link to RFC/PLAN and brief description of implementation]
+
+## Changes
+- [ ] [List of key changes]
+- [ ] [List of key changes]
+- [ ] [List of key changes]
+
+## Testing
+- [ ] Tests pass: [TEST_UNIT]
+- [ ] Integration tests pass: [TEST_INTEGRATION]
+- [ ] Lint clean: [LINT_CHECK]
+- [ ] Coverage acceptable: [TEST_COVERAGE]
+- [ ] Manual testing complete per /demo
+
+## Deployment
+**Pre-deployment:**
+```
+[Any required steps before deployment]
+```
+
+**Post-deployment:**
+```
+[Any required steps after deployment]
+```
+
+## Rollback
+```
+[How to revert if needed]
+```
+
+## Checklist
+- [ ] Code reviewed
+- [ ] Tests passing
+- [ ] Documentation updated
+- [ ] Breaking changes noted
+
+---
+**WORKFLOW**: [/demo] ← You are here → Merge
