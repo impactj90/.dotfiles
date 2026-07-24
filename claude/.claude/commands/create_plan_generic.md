@@ -1,5 +1,5 @@
 ---
-description: Create detailed implementation plans through interactive research and iteration
+description: Create detailed implementation plans with thorough research and iteration
 model: opus
 ---
 
@@ -27,8 +27,8 @@ Please provide:
 
 I'll analyze this information and work with you to create a comprehensive plan.
 
-Tip: You can also invoke this command with a ticket file directly: `/create_plan thoughts/shared/tickets/my-ticket.md`
-For deeper analysis, try: `/create_plan think deeply about thoughts/shared/tickets/my-ticket.md`
+Tip: You can also invoke this command with a ticket file directly: `/create_plan thoughts/allison/tickets/eng_1234.md`
+For deeper analysis, try: `/create_plan think deeply about thoughts/allison/tickets/eng_1234.md`
 ```
 
 Then wait for the user's input.
@@ -38,7 +38,7 @@ Then wait for the user's input.
 ### Step 1: Context Gathering & Initial Analysis
 
 1. **Read all mentioned files immediately and FULLY**:
-   - Ticket files (e.g., `thoughts/shared/tickets/my-ticket.md`)
+   - Ticket files (e.g., `thoughts/allison/tickets/eng_1234.md`)
    - Research documents
    - Related implementation plans
    - Any JSON/data files mentioned
@@ -52,11 +52,10 @@ Then wait for the user's input.
    - Use the **codebase-locator** agent to find all files related to the ticket/task
    - Use the **codebase-analyzer** agent to understand how the current implementation works
    - If relevant, use the **thoughts-locator** agent to find any existing thoughts documents about this feature
-   - If a Linear ticket is mentioned, read it with the Linear MCP tools (there is no dedicated agent for this)
+   - If a Linear ticket is mentioned, use the **linear-ticket-reader** agent to get full details
 
    These agents will:
    - Find relevant source files, configs, and tests
-   - Identify the specific directories to focus on, using real paths from this repository
    - Trace data flow and key functions
    - Return detailed explanations with file:line references
 
@@ -114,7 +113,7 @@ After getting initial clarifications:
    - **thoughts-analyzer** - To extract key insights from the most relevant documents
 
    **For related tickets:**
-   - Use the Linear MCP tools directly to find similar issues or past implementations
+   - **linear-searcher** - To find similar issues or past implementations
 
    Each agent knows how to:
    - Find the right files and code patterns
@@ -180,27 +179,7 @@ After structure approval:
 2. **Use this template structure**:
 
 ````markdown
----
-date: YYYY-MM-DD
-status: draft
-ticket: thoughts/shared/tickets/[relevant].md
-research: thoughts/shared/research/[relevant].md
-tags: [plan, relevant-component-names]
----
-
 # [Feature/Task Name] Implementation Plan
-
-## TL;DR
-
-- **What**: [one sentence - what will exist afterwards that does not exist now]
-- **Why**: [one sentence - the problem this solves]
-- **How**: [one sentence - the approach, not the steps]
-- **Watch out**: [the single thing most likely to go wrong, or "nothing unusual"]
-- **Size**: [N phases, which areas/files are touched]
-
-[Five lines, no more. This is the only part of the plan that is guaranteed to
-be read. Write it LAST, once the phases exist, and make it survive on its own -
-someone who reads only this block should be able to approve or reject the plan.]
 
 ## Overview
 
@@ -227,19 +206,6 @@ someone who reads only this block should be able to approve or reject the plan.]
 
 [High-level strategy and reasoning]
 
-## Chosen Approach and Rejected Alternatives
-
-**Chosen:** [approach] - because [reasoning]
-
-**Rejected:**
-- [Alternative A] - [why not: cost, risk, conflicts with X, ...]
-- [Alternative B] - [why not]
-
-[Fill this from the design options you presented in Step 2, not from hindsight.
-The planning conversation disappears when the session ends; this section is the
-only place the reasoning survives. If you genuinely considered no alternative,
-write "none considered" - do not invent one.]
-
 ## Phase 1: [Descriptive Name]
 
 ### Overview
@@ -258,12 +224,11 @@ write "none considered" - do not invent one.]
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] [What this proves]: `<exact command, verified to exist in this repo>`
-- [ ] [What this proves]: `<exact command, verified to exist in this repo>`
-
-> Every command listed here MUST be one you have confirmed exists in THIS
-> repository - see "Verification Commands Must Be Real" below. Never copy
-> commands out of this template verbatim.
+- [ ] Migration applies cleanly: `make migrate`
+- [ ] Unit tests pass: `make test-component`
+- [ ] Type checking passes: `npm run typecheck`
+- [ ] Linting passes: `make lint`
+- [ ] Integration tests pass: `make test-integration`
 
 #### Manual Verification:
 - [ ] Feature works as expected when tested via UI
@@ -305,65 +270,35 @@ write "none considered" - do not invent one.]
 
 ## References
 
-- Original ticket: `thoughts/shared/tickets/[relevant].md`
+- Original ticket: `thoughts/allison/tickets/eng_XXXX.md`
 - Related research: `thoughts/shared/research/[relevant].md`
 - Similar implementation: `[file:line]`
 ````
 
-### Step 5: Review
+### Step 5: Sync and Review
 
-1. **Present the plan - paste the TL;DR, don't just link the file**:
+1. **Sync the thoughts directory**:
+   - This ensures the plan is properly indexed and available
+
+2. **Present the draft plan location**:
    ```
-   Plan written to `thoughts/shared/plans/YYYY-MM-DD-description.md` (status: draft)
+   I've created the initial implementation plan at:
+   `thoughts/shared/plans/YYYY-MM-DD-ENG-XXXX-description.md`
 
-   [paste the TL;DR block from the plan verbatim here]
-
-   Please review and let me know:
+   Please review it and let me know:
    - Are the phases properly scoped?
    - Are the success criteria specific enough?
    - Any technical details that need adjustment?
    - Missing edge cases or considerations?
    ```
 
-   Assume the user will read only what you put in the message. Linking the file
-   and saying "have a look" is not presenting the plan.
-
-2. **Iterate based on feedback** - be ready to:
+3. **Iterate based on feedback** - be ready to:
    - Add missing phases
    - Adjust technical approach
    - Clarify success criteria (both automated and manual)
    - Add/remove scope items
 
-3. **Continue refining** until the user is satisfied
-
-4. **On explicit approval, flip the status**: set `status: ready` in the plan's
-   frontmatter. Only do this when the user actually approves - "looks good",
-   "go ahead", "ready". Silence, a follow-up question, or an unanswered message
-   is NOT approval, and the plan stays `draft`.
-
-   The status is the approval gate, not decoration: `/implement_plan` refuses a
-   `draft` plan, and a `PreToolUse` hook asks for confirmation before writing
-   code while the session's plan is still `draft`.
-
-## Plan Status Lifecycle
-
-```
-draft ──► ready ──► implementing ──► implemented
-  │
-  └──────────────► abandoned
-```
-
-| Status | Meaning | Who sets it |
-|---|---|---|
-| `draft` | Being written, not signed off | `/create_plan` on creation |
-| `ready` | Reviewed and approved by the user | `/create_plan` after explicit approval |
-| `implementing` | Being worked through right now | `/implement_plan` when it starts |
-| `implemented` | All phases done and verified | `/implement_plan` when it finishes |
-| `abandoned` | Dropped or superseded - say why in the body | whoever drops it |
-
-`~/.claude/scripts/plan-index.sh` (or `/plans`) reads these and shows what is
-open. A plan with no status is invisible to that view, which is why every new
-plan starts with an explicit `status: draft`.
+4. **Continue refining** until the user is satisfied
 
 ## Important Guidelines
 
@@ -384,8 +319,6 @@ plan starts with an explicit `status: draft`.
    - Research actual code patterns using parallel sub-tasks
    - Include specific file paths and line numbers
    - Write measurable success criteria with clear automated vs manual distinction
-   - Use the repository's own task runner when it has one (Makefile, package.json
-     scripts, justfile) - but only targets you have verified actually exist
 
 4. **Be Practical**:
    - Focus on incremental, testable changes
@@ -410,7 +343,7 @@ plan starts with an explicit `status: draft`.
 **Always separate success criteria into two categories:**
 
 1. **Automated Verification** (can be run by execution agents):
-   - Commands that can be run - see "Verification Commands Must Be Real" below
+   - Commands that can be run: `make test`, `npm run lint`, etc.
    - Specific files that should exist
    - Code compilation/type checking
    - Automated test suites
@@ -421,39 +354,15 @@ plan starts with an explicit `status: draft`.
    - Edge cases that are hard to automate
    - User acceptance criteria
 
-### Verification Commands Must Be Real
-
-A plan whose "Automated Verification" section lists commands that do not exist
-is worse than no plan: the implementing agent hits an error on every phase and
-starts improvising. Before writing ANY command into a plan:
-
-1. **Discover the real commands.** Read this repository's `package.json`
-   scripts, `Makefile` targets, `justfile`, `CONTRIBUTING.md` and `CLAUDE.md`.
-   Never assume `make check`, `make test`, `npm test` or anything else exists
-   just because it is conventional.
-2. **Verify each one exists** before you write it down - e.g.
-   `grep -E '^<target>:' Makefile`, or check the `scripts` block of
-   `package.json`. If it is not there, it does not go in the plan.
-3. **Honour documented constraints.** If `CLAUDE.md`, the project memory, or the
-   user has forbidden a command (typical cases: full-project builds, typechecks
-   or lint runs that exhaust memory on this machine), it must NOT appear as a
-   success criterion. Name who verifies it instead - CI, the deploy platform,
-   or a human.
-4. **Prefer the narrowest command that proves the change.** A single test file
-   beats the whole suite; linting only the changed files beats linting the
-   project. Narrow commands run faster and fail for the right reason.
-5. **Write commands exactly as they must be typed**, including paths and flags,
-   so the implementing agent can copy them verbatim without guessing.
-
-**Format example** - illustrative only, substitute the commands THIS repo has:
+**Format example:**
 ```markdown
 ### Success Criteria:
 
 #### Automated Verification:
-- [ ] Migration applies cleanly: `<the repo's migrate command>`
-- [ ] Affected tests pass: `<test runner> <specific test file>`
-- [ ] Changed files lint clean: `<linter> <the files you touched>`
-- [ ] Types check on changed files: `<typecheck command, scoped if required>`
+- [ ] Database migration runs successfully: `make migrate`
+- [ ] All unit tests pass: `go test ./...`
+- [ ] No linting errors: `golangci-lint run`
+- [ ] API endpoint returns 200: `curl localhost:8080/api/new-endpoint`
 
 #### Manual Verification:
 - [ ] New feature appears correctly in the UI
@@ -496,9 +405,6 @@ When spawning research sub-tasks:
    - What information to extract
    - Expected output format
 4. **Be EXTREMELY specific about directories**:
-   - Translate the ticket's shorthand into real paths from THIS repo before you
-     spawn anything (e.g. "the API" -> the actual directory you found in Step 1)
-   - Never pass a vague area name when you already know the concrete directory
    - Include the full path context in your prompts
 5. **Specify read-only tools** to use
 6. **Request specific file:line references** in responses
@@ -522,16 +428,15 @@ tasks = [
 ## Example Interaction Flow
 
 ```
-User: /create_plan
+User: /implementation_plan
 Assistant: I'll help you create a detailed implementation plan...
 
-User: We need to add X. See thoughts/shared/tickets/my-ticket.md
+User: We need to add parent-child tracking for Claude sub-tasks. See thoughts/allison/tickets/eng_1478.md
 Assistant: Let me read that ticket file completely first...
 
 [Reads file fully]
 
-Based on the ticket, I understand we need to [accurate summary grounded in the
-actual code I found]. Before I start planning, I have some questions...
+Based on the ticket, I understand we need to track parent-child relationships for Claude sub-task events in the daemon. Before I start planning, I have some questions...
 
 [Interactive process continues...]
 ```

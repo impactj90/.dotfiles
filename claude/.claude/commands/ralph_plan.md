@@ -1,3 +1,7 @@
+---
+description: Create implementation plan for highest priority Linear ticket ready for spec
+---
+
 ## PART I - IF A TICKET IS MENTIONED
 
 0c. use `linear` cli to fetch the selected item into thoughts with the ticket number - ./thoughts/shared/tickets/ENG-xxxx.md
@@ -28,3 +32,28 @@ think deeply
 2a. move the item to "plan in review" using the MCP tools
 
 think deeply, use TodoWrite to track your tasks. When fetching from linear, get the top 10 items by priority but only work on ONE item - specifically the highest priority SMALL or XS sized issue.
+
+### PART III - When you're done
+
+
+Print a message for the user (replace placeholders with actual values):
+
+```
+✅ Completed implementation plan for ENG-XXXX: [ticket title]
+
+Approach: [selected approach description]
+
+The plan has been:
+
+Created at thoughts/shared/plans/YYYY-MM-DD-ENG-XXXX-description.md
+Synced to thoughts repository
+Attached to the Linear ticket
+Ticket moved to "plan in review" status
+
+Implementation phases:
+- Phase 1: [phase 1 description]
+- Phase 2: [phase 2 description]
+- Phase 3: [phase 3 description if applicable]
+
+View the ticket: https://linear.app/humanlayer/issue/ENG-XXXX/[ticket-slug]
+```

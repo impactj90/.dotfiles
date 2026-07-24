@@ -1,3 +1,7 @@
+---
+description: Validate implementation against plan, verify success criteria, identify issues
+---
+
 # Validate Plan
 
 You are tasked with validating that an implementation plan was correctly executed, verifying all success criteria and identifying any deviations or issues.
@@ -18,10 +22,15 @@ When invoked:
    # Check recent commits
    git log --oneline -n 20
    git diff HEAD~N..HEAD  # Where N covers implementation commits
-
-   # Run comprehensive checks
-   cd $(git rev-parse --show-toplevel) && make check test
    ```
+
+   Then run the verification commands **from the plan's own Success Criteria**.
+   Do not assume a conventional one like `make check` exists - confirm it
+   against `package.json` scripts, `Makefile` targets, `justfile` or `CLAUDE.md`
+   first. If the plan lists a command this repo does not have, that is itself a
+   finding: report it under "Deviations from Plan" and validate with the real
+   command instead. Skip any command the project forbids (e.g. full-project
+   builds that exhaust memory) and note who verifies it instead.
 
 ## Validation Process
 
@@ -60,6 +69,10 @@ For each phase in the plan:
 1. **Check completion status**:
    - Look for checkmarks in the plan (- [x])
    - Verify the actual code matches claimed completion
+   - Compare the plan's `status:` frontmatter against what you actually find.
+     A plan marked `implemented` whose code is not there, or one still marked
+     `implementing` although everything is done and verified, is a finding -
+     report it and correct the status.
 
 2. **Run automated verification**:
    - Execute each command from "Automated Verification"
@@ -82,15 +95,21 @@ Create comprehensive validation summary:
 ```markdown
 ## Validation Report: [Plan Name]
 
+### Verdict
+[ONE line: does the implementation match the plan - yes / yes with deviations /
+no. Then at most three bullets for what the user has to act on. Put this in the
+chat message too, not only in the file: assume it is the only part that gets
+read.]
+
 ### Implementation Status
 ✓ Phase 1: [Name] - Fully implemented
 ✓ Phase 2: [Name] - Fully implemented
 ⚠️ Phase 3: [Name] - Partially implemented (see issues)
 
 ### Automated Verification Results
-✓ Build passes: `make build`
-✓ Tests pass: `make test`
-✗ Linting issues: `make lint` (3 warnings)
+✓ [What it proves]: `<the exact command you ran>`
+✓ [What it proves]: `<the exact command you ran>`
+✗ [What it proves]: `<the exact command you ran>` (3 warnings)
 
 ### Code Review Findings
 
