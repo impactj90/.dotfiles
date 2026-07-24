@@ -54,6 +54,7 @@ Use TodoWrite to create:
 ```
 - [ ] Phase 1: Research (spawn sub-agent)
 - [ ] Phase 2: Plan (spawn sub-agent)
+- [ ] Plan approval (USER - blocking gate)
 - [ ] Phase 3: Implement (spawn sub-agent)
 - [ ] Phase 4: Run tests
 ```
@@ -167,6 +168,39 @@ PLAN_COMPLETE: <full path to created file>
 5. Open the file and read its "Open Questions" / "Offene Fragen" section (if any). If it contains unresolved BLOCKING questions, apply the Open-Questions Gate before moving on, even if the agent returned `PLAN_COMPLETE`.
 
 Update todo: `- [x] Phase 2: Plan (spawn sub-agent)`
+
+### 3b. Plan-Approval Gate (STOP - the user decides)
+
+The planning sub-agent writes the plan with `status: draft`, and it cannot ask
+for approval because it cannot talk to the user. **You can.** This gate is not
+optional and it is not the Open-Questions Gate: it fires even when the plan is
+perfectly self-confident, because a plan nobody read is exactly the plan that
+wastes a whole implementation run.
+
+1. Read `{PLAN_PATH}` and extract its `## TL;DR` block.
+2. Present it in the chat message itself - not a link, not "have a look":
+
+   ```
+   Plan ready for your approval: {PLAN_PATH} (status: draft)
+
+   [TL;DR block verbatim]
+
+   Phases: [one line per phase]
+
+   Approve and I start implementing, or tell me what to change.
+   ```
+
+3. **WAIT for a real answer.** Do not proceed on silence, do not assume
+   approval, do not implement "just the safe parts" meanwhile.
+4. On approval: set `status: ready` in the plan's frontmatter, then continue.
+   On change requests: re-spawn the planning sub-agent with the feedback
+   appended, and come back to this gate.
+
+Skipping this gate does not just violate the process - it breaks the run:
+`/implement_plan` refuses a `draft` plan, and the `PreToolUse` plan guard will
+interrupt the implementation sub-agent on its first edit.
+
+Update todo: `- [x] Plan approval (USER - blocking gate)`
 
 ### 4. Phase 3: Implementation Sub-Agent
 
